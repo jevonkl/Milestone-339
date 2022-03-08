@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+	<head>
+		<meta charset="UTF-8">
+		<title>Make A New Product</title>
+	</head>
+	<body>
+		<div layout:fragment="content">
+			<form action="#" th:action="@{createProduct}" th:object="${productModel}" method="post">
+				<table>
+					<tr>
+						<td>Game Name:</td>
+						<td>
+							<input type="text" th:field="*{name}">
+						</td>
+						<td>
+							<h5 style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name Errors:</h5>
+						</td>
+					</tr>
+					<tr>
+						<td>Game Date:</td>
+						<td>
+							<input type="text" th:field="*{date}">
+						</td>
+						<td>
+							<h5 style="color: red" th:if="${#fields.hasErrors('date')}" th:errors="*{genre}">Date Errors:</h5>
+						</td>
+					</tr>
+					<tr>
+						<td>Game Genre:</td>
+						<td>
+							<input type="text" th:field="*{genre}">
+						</td>
+						<td>
+							<h5 style="color: red" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre Errors:</h5>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<input type="submit" value="Submit"/>
+						</td>
+					</tr>
+					
+					<div th:if="${#fields.hasErrors('*')}">List of Errors</div>
+					<div th:each="err : ${#fields.errors('*')}">
+						<span style="color:red" th:text="${err}" class="fieldError"></span>
+					</div>
+				</table>
+		</div>
+	</body>
+</html>
